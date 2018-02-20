@@ -17,21 +17,24 @@ from utils.data_loader import SKTDataLoader
 
 # In[2]:
 
+import random
+random.seed(1234)
+
 num_layers = 3 # Number of layers of RNN
 num_hidden = 128 # Hidden size of RNN cell
 batch_size = 128 # Number of sentences in a batch
-seq_length = 35 # Length of sequence
+seq_length = 75 # Length of sequence
 split = [0.9, 0.1, 0] # Splitting proportions into train, valid, test
 learning_rate = 0.001 # Initial learning rate
 keep_prob_val = 0.8 # keep_prob is 1 - dropout i.e., if dropout = 0.2, then keep_prob is 0.8
 num_epochs = 100
 verbose = 1      # Display every <verbose> epochs
 
-model_name = 'attn_3_8000_0.8_trainonly' # Name is <num_layers>_<sentencepiece_vocabsize>_<keep_prob>
+model_name = 'attn_3_0.8_trainonly' # Name is <num_layers>_<sentencepiece_vocabsize>_<keep_prob>
 
 
 # In[3]:
-data_loader = SKTDataLoader('data/dcs_data_input_train_sent.txt','data/dcs_data_output_train_sent.txt',batch_size,seq_length, split=split)
+data_loader = SKTDataLoader('data/train.src','data/train.trg',batch_size,seq_length, split=split)
 vocab_size =  data_loader.vocab_size   # Number of unique words in dataset
 
 data_size = data_loader.data_size      # Number of paris in the entire dataset
